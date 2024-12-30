@@ -6,7 +6,7 @@
 /*   By: duha <duha@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 08:04:34 by duha              #+#    #+#             */
-/*   Updated: 2024/12/21 06:12:40 by duha             ###   ########.fr       */
+/*   Updated: 2024/12/24 02:01:19 by duha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,26 @@ char	*ft_strchr(const char *s, int c)
 		p++;
 	}
 	return (NULL);
+}
+
+char	*ft_strdup(const char *s)
+{
+	char	*dup;
+	size_t	len;
+	size_t	i;
+
+	if (!s)
+		return (NULL);
+	len = ft_strlen(s);
+	dup = malloc(len + 1);
+	if (!dup)
+		return (NULL);
+	i = 0;
+	while (i < len)
+	{
+		dup[i] = s[i];
+		i++;
+	}
+	dup[i] = '\0';
+	return (dup);
 }

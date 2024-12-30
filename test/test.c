@@ -28,4 +28,5 @@ int main()
 	int fd = open("two_lines.txt", O_RDONLY);
 	char *line = store_line(fd);
 	printf("%s\n", line);
+	
 }
