@@ -1,4 +1,4 @@
-#include "../get_next_line.h"
+#include "get_next_line.h"
 #include <fcntl.h>
 #include <stdio.h>
 #include <string.h>
@@ -28,5 +28,4 @@ int main()
 	int fd = open("two_lines.txt", O_RDONLY);
 	char *line = store_line(fd);
 	printf("%s\n", line);
-	
 }

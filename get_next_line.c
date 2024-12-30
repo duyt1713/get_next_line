@@ -6,7 +6,7 @@
 /*   By: duha <duha@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 08:04:31 by duha              #+#    #+#             */
-/*   Updated: 2024/12/24 05:31:15 by duha             ###   ########.fr       */
+/*   Updated: 2024/12/30 12:23:06 by duha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,17 @@
  */
 char	*get_next_line(int fd)
 {
-	static char	*buffer;
+	static char	buffer[BUFFER_SIZE];
+	char		*tmp;
 	char		*line;
 	char		*new_line;
 	ssize_t		bytes;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (!buffer)
-		buffer = ft_strdup("");
-	buffer = read_and_store_line(fd, buffer);
+	bytes = read(fd, buffer, BUFFER_SIZE);
+	if (bytes <= 0)
+		return (free what, NULL);
 	new_line = ft_strchr(buffer, '\n');
 	if (new_line)
 	{
@@ -47,9 +48,6 @@ static char	*read_and_store_line(int fd, char *buffer)
 {
 	ssize_t	bytes;
 
-	buffer = malloc(BUFFER_SIZE + 1);
-	if (!buffer)
-		return (NULL); //NULL or -1?
 	bytes = read(fd, buffer, BUFFER_SIZE);
 	if (bytes <= 0)
 	{
