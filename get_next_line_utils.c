@@ -6,7 +6,7 @@
 /*   By: duha <duha@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 08:04:34 by duha              #+#    #+#             */
-/*   Updated: 2024/12/30 11:45:05 by duha             ###   ########.fr       */
+/*   Updated: 2024/12/30 15:46:48 by duha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,24 +83,20 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-char	*ft_strdup(const char *s)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	char	*dup;
-	size_t	len;
+	char	*res;
+	size_t	total;
 	size_t	i;
 
-	if (!s)
-		return (NULL);
-	len = ft_strlen(s);
-	dup = malloc(len + 1);
-	if (!dup)
+	res = malloc(nmemb * size);
+	if (!res)
 		return (NULL);
 	i = 0;
-	while (i < len)
+	while (i <= (nmemb * size))
 	{
-		dup[i] = s[i];
+		res[i] = '\0';
 		i++;
 	}
-	dup[i] = '\0';
-	return (dup);
+	return (res);
 }
