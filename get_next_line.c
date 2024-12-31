@@ -6,7 +6,7 @@
 /*   By: duha <duha@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 08:04:31 by duha              #+#    #+#             */
-/*   Updated: 2024/12/30 16:08:11 by duha             ###   ########.fr       */
+/*   Updated: 2024/12/31 20:21:35 by duha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,38 @@
  */
 char	*get_next_line(int fd)
 {
-	static char	buffer[BUFFER_SIZE + 1];
-	char		*current_line;
-	char		*new_line;
-	ssize_t		bytes;
+	t_struct	gnl;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	current_line = ft_calloc(1, 1);
-	if (!current_line)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
+	if (!gnl.storage_buffer)
+		gnl.storage_buffer = ft_calloc(1, sizeof(char));
+	gnl.read_buffer = malloc(BUFFER_SIZE + 1);
+	if (!gnl.read_buffer)
 		return (NULL);
 	while (!ft_strchr(buffer, '\n'))
 	{
 		if (*buffer)
 		{
-			current_line = ft_strjoin(current_line, buffer);
+			current_line = ft_strjoin_free(current_line, buffer);
 			*buffer = '\0';
 		}
 		bytes = read(fd, buffer, BUFFER_SIZE);
@@ -48,8 +65,8 @@ char	*get_next_line(int fd)
 		buffer[bytes] = '\0';
 	}
 	new_line = ft_strchr(buffer, '\n');
-	current_line = ft_strjoin(current_line, buffer);
-	current_line = ft_strjoin(current_line, "\n");
+	current_line = ft_strjoin_free(current_line, buffer);
+	current_line = ft_strjoin_free(current_line, "\n");
 	ft_memmove(buffer, new_line + 1, ft_strlen(new_line + 1) + 1);
 	return (current_line);
 }

@@ -6,13 +6,13 @@
 /*   By: duha <duha@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 08:04:34 by duha              #+#    #+#             */
-/*   Updated: 2024/12/30 15:46:48 by duha             ###   ########.fr       */
+/*   Updated: 2024/12/31 18:07:45 by duha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(char *s)
+size_t	ft_strlen(const char *s)
 {
 	size_t	len;
 
@@ -44,7 +44,7 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	return (dest);
 }
 
-char	*ft_strjoin(const char *s1, const char *s2)
+char	*ft_strjoin_free(const char *s1, const char *s2)
 {
 	size_t	len1;
 	size_t	len2;
@@ -64,6 +64,8 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	ft_memmove(res, s1, len1);
 	ft_memmove(res + len1, s2, len2);
 	res[len1 + len2] = '\0';
+	free(s1);
+	free(s2);
 	return (res);
 }
 
