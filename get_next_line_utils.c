@@ -6,7 +6,7 @@
 /*   By: duha <duha@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 08:04:34 by duha              #+#    #+#             */
-/*   Updated: 2024/12/31 18:07:45 by duha             ###   ########.fr       */
+/*   Updated: 2025/01/03 07:02:39 by duha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	return (dest);
 }
 
-char	*ft_strjoin_free(const char *s1, const char *s2)
+char	*ft_strjoin_free(char *s1, char *s2)
 {
 	size_t	len1;
 	size_t	len2;
@@ -79,7 +79,7 @@ char	*ft_strchr(const char *s, int c)
 	while (*p)
 	{
 		if (*p == c)
-			return (*p);
+			return ((char *)p);
 		p++;
 	}
 	return (NULL);
@@ -88,7 +88,6 @@ char	*ft_strchr(const char *s, int c)
 void	*ft_calloc(size_t nmemb, size_t size)
 {
 	char	*res;
-	size_t	total;
 	size_t	i;
 
 	res = malloc(nmemb * size);
@@ -101,4 +100,19 @@ void	*ft_calloc(size_t nmemb, size_t size)
 		i++;
 	}
 	return (res);
+}
+
+char	*ft_strdup(const char *s1)
+{
+	char	*s2;
+	char	*p;
+
+	s2 = (char *)malloc(ft_strlen(s1) + 1);
+	if (!s2)
+		return (NULL);
+	p = s2;
+	while (*s1)
+		*p++ = *s1++;
+	*p = '\0';
+	return (s2);
 }
