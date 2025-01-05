@@ -6,7 +6,7 @@
 /*   By: duha <duha@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 08:04:31 by duha              #+#    #+#             */
-/*   Updated: 2025/01/03 08:06:24 by duha             ###   ########.fr       */
+/*   Updated: 2025/01/05 22:10:53 by duha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,53 +25,58 @@
  */
 char	*get_next_line(int fd)
 {
-	char	*read_buffer;
-	
+	char		*read_buffer;
+	static char	*storage;
+	char		*line;
+	char		*remainer_ptr;
+	char 		*remainer;
+	ssize_t		bytes;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-
-	if (!gnl.storage_buffer)
-		gnl.storage_buffer = ft_calloc(1, sizeof(char));
-	if (!gnl.read_buffer)
+	if (!storage)
 	{
-		gnl.read_buffer = malloc(BUFFER_SIZE + 1);
-		if (!gnl.read_buffer)
+		storage = ft_strdup("");
+		if (!storage)
 			return (NULL);
 	}
-
-	while (ft_strchr(gnl.storage_buffer, '\n') == NULL)
+	read_buffer = malloc(BUFFER_SIZE + 1);
+	if (!read_buffer)
+		return (NULL);
+	while (ft_strchr(read_buffer, '\n') == NULL)
 	{
-		gnl.bytes_read = read(fd, gnl.read_buffer, BUFFER_SIZE);
-		if (gnl.bytes_read <= 0)
+		bytes = read(fd, read_buffer, BUFFER_SIZE);
+		if (bytes <= 0)
 		{
-			free(gnl.read_buffer);
-			gnl.read_buffer = NULL;
-			if (gnl.bytes_read == 0 && *gnl.storage_buffer)
-				return (gnl.storage_buffer);
-			free(gnl.storage_buffer);
+			free(read_buffer);
+			if (bytes == 0 && *storage)
+			{
+				line = ft_strdup(storage);
+				free (storage);
+				storage = NULL;
+				return (line);
+			}
+			free (storage);
+			storage = NULL;
 			return (NULL);
 		}
-		gnl.read_buffer[gnl.bytes_read] = '\0';
-		gnl.storage_buffer = ft_strjoin_free(gnl.storage_buffer, gnl.read_buffer);
-		if (!gnl.storage_buffer)
-		{
-			free(gnl.read_buffer);
-			return (NULL);
-		}
+		read_buffer[bytes] = '\0';
+		storage = ft_strjoin_free(storage, read_buffer);
 	}
-	gnl.new_line_remainer = ft_strchr(gnl.storage_buffer, '\n');
-    if (gnl.new_line_remainer)
-    {
-        *gnl.new_line_remainer = '\0';
-        gnl.complete_line = ft_strdup(gnl.storage_buffer);
-        gnl.new_line_remainer = ft_strdup(gnl.new_line_remainer + 1);
-        free(gnl.storage_buffer);
-        gnl.storage_buffer = gnl.new_line_remainer;
-        return (gnl.complete_line);
-    }
-    gnl.complete_line = ft_strdup(gnl.storage_buffer);
-    free(gnl.storage_buffer);
-    gnl.storage_buffer = NULL;
-    return (gnl.complete_line);
+	remainer_ptr = ft_strchr(storage, '\n');
+	if (remainer_ptr)
+	{
+		remainer = ft_strdup(remainer_ptr);
+		*remainer_ptr = '\0';
+		line = ft_strdup(storage);
+		free(storage);
+		storage = remainer;
+		free(read_buffer);
+		return (line);
+	}
+	line = ft_strdup(storage);
+	free(storage);
+	storage = NULL;
+	free(read_buffer);
+	return (line);
 }

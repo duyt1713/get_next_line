@@ -6,7 +6,7 @@
 
 int main(void)
 {
-    int fd = open("two_lines.txt", O_RDONLY);
+    int fd = open("test_two_lines.txt", O_RDONLY);
     if (fd == -1)
     {
         perror("Error opening file");
