@@ -6,7 +6,7 @@
 /*   By: duha <duha@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 08:04:34 by duha              #+#    #+#             */
-/*   Updated: 2025/01/05 21:57:03 by duha             ###   ########.fr       */
+/*   Updated: 2025/01/06 17:51:56 by duha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,20 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 			*d++ = *s++;
 	}
 	return (dest);
+}
+
+char	*ft_strdup(const char *s1)
+{
+	char	*s2;
+	size_t	len;
+
+	len = ft_strlen(s1);
+	s2 = (char *)malloc(len + 1);
+	if (!s2)
+		return (NULL);
+	ft_memmove(s2, s1, len);
+	s2[len] = '\0';
+	return (s2);
 }
 
 char	*ft_strjoin_free(char *s1, char *s2)
@@ -82,19 +96,4 @@ char	*ft_strchr(const char *s, int c)
 		p++;
 	}
 	return (NULL);
-}
-
-char	*ft_strdup(const char *s1)
-{
-	char	*s2;
-	char	*p;
-
-	s2 = (char *)malloc(ft_strlen(s1) + 1);
-	if (!s2)
-		return (NULL);
-	p = s2;
-	while (*s1)
-		*p++ = *s1++;
-	*p = '\0';
-	return (s2);
 }
