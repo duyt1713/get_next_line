@@ -6,7 +6,7 @@
 /*   By: duha <duha@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 08:04:34 by duha              #+#    #+#             */
-/*   Updated: 2025/01/06 17:51:56 by duha             ###   ########.fr       */
+/*   Updated: 2025/01/07 17:49:57 by duha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ char	*ft_strjoin_free(char *s1, char *s2)
 
 char	*ft_strchr(const char *s, int c)
 {
-	const char *p;
+	const char	*p;
 
 	if (!s)
 		return (NULL);
