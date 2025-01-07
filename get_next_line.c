@@ -6,7 +6,7 @@
 /*   By: duha <duha@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 08:04:31 by duha              #+#    #+#             */
-/*   Updated: 2025/01/06 18:20:37 by duha             ###   ########.fr       */
+/*   Updated: 2025/01/07 13:13:56 by duha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*get_next_line(int fd)
 	static char	*storage;
 	char		*line;
 	char		*newline_ptr;
-	char 		*remainer;
+	char		*remainer;
 	ssize_t		bytes;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
