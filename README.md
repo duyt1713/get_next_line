@@ -8,3 +8,8 @@ Result: succeeded (100/100)
 ## Testing
 
 All OK'ed with [gnlTester](https://github.com/Tripouille/gnlTester).
+
+Own tester is also available:
+- `make` for both mandatory and bonus parts.
+- `make m` for only mandatory part.
+- `make b` for only bonus part.
