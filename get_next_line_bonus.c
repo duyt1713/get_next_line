@@ -6,7 +6,7 @@
 /*   By: duha <duha@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 08:04:31 by duha              #+#    #+#             */
-/*   Updated: 2025/01/08 13:47:42 by duha             ###   ########.fr       */
+/*   Updated: 2025/01/09 18:26:10 by duha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,7 @@ char	*get_next_line(int fd)
 		tmp = storage[fd];
 		storage[fd] = ft_strjoin_free(storage[fd], read_buffer);
 		if (!storage[fd])
-		{
-			free(tmp);
-			return (free(read_buffer), NULL);
-		}
+			return (free (tmp), free(read_buffer), NULL);
 	}
 	return (do_line(&storage[fd], &read_buffer));
 }
