@@ -6,26 +6,33 @@
 /*   By: duha <duha@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 08:04:31 by duha              #+#    #+#             */
-/*   Updated: 2025/01/09 18:28:19 by duha             ###   ########.fr       */
+/*   Updated: 2025/01/09 18:46:47 by duha             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <unistd.h>
 
-static int	initialize(int fd, char **storage);
-static char	*read_fail_eol(ssize_t bytes, char **read_buffer, char **storage);
-static char	*do_line(char **storage, char **read_buffer);
-static void	free_and_null(char **storage, char **read_buffer);
-
 /**
  * get_next_line - Returns a line read from a file descriptor.
  *
  * @fd: The file descriptor to read from.
  *
+ * Helper function:
+ * initialize:    Checks the validity of fd and initializes storage.
+ * read_fail_eol: Handles end-of-file and read errors, frees buffers.
+ * do_line:       Extracts line from storage and updates storage.
+ * free_and_null: Frees storage and read buffer, sets them to NULL.
+ *
  * Return: Read line: correct behavior
  *         or NULL if there is nothing else to read, or an error occurred.
  */
+char		*get_next_line(int fd);
+static int	initialize(int fd, char **storage);
+static char	*read_fail_eol(ssize_t bytes, char **read_buffer, char **storage);
+static char	*do_line(char **storage, char **read_buffer);
+static void	free_and_null(char **storage, char **read_buffer);
+
 char	*get_next_line(int fd)
 {
 	char		*read_buffer;
